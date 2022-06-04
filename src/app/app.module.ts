@@ -6,13 +6,16 @@ import { AppComponent } from './app.component';
 import { HotelsComponent } from './hotels/hotels.component';
 import { HotelnamesComponent } from './hotelnames/hotelnames.component';
 import { RouterModule,Routes } from '@angular/router';
-
+import {HttpClientModule} from '@angular/common/http';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { RatingComponent } from './rating/rating.component';
+import { MainpageComponent } from './mainpage/mainpage.component';
+import { FormsModule } from '@angular/forms';
 
 const routes:Routes=[
-  
-  {path:'hotelnames',component:HotelnamesComponent}
+  {path:'',redirectTo:'home',pathMatch:'full'},
+  {path:'home',component:HotelsComponent},
+  {path:'hotelnames',component:HotelnamesComponent},
 ]
 @NgModule({
   declarations: [
@@ -21,12 +24,15 @@ const routes:Routes=[
     HotelnamesComponent,
   
     FeedbackComponent,
-    RatingComponent
+    RatingComponent,
+    MainpageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    HttpClientModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

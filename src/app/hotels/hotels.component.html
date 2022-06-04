@@ -10,11 +10,16 @@
     </thead>
     <tbody>
       <tr *ngFor="let hotels of arr">
-        <td scope="row">{{hotels.hotelid}}</td>
+        <td scope="row">{{hotels.hotelId}}</td>
         <td><img src="/assets/hotelimage.png"  width="100" height="100"></td>
-        <td><h5>{{hotels.hotelname}}</h5></td>
-        <td>{{hotels.hotelcost|currency : 'INR'}}</td>
-        <td><button>book</button></td>
+        <td><h5>{{hotels.hotelName}}</h5>
+            <h5>feedback:{{hotels.feedback}}</h5>
+            <h5>rating:{{hotels.userRating}}</h5>
+        </td>
+        <td>{{hotels.hotelRent|currency : 'INR'}}</td>
+        <td><button #b value="{{hotels.hotelId}}" (click)="bookingService(b.value)">{{hotels.status}}</button></td>
+        <td><button #b1 name ="{{hotels.hotelName}}" (click)="sendHotel('hotelnames',b1.name)">view</button></td>
+
         
       </tr>
       

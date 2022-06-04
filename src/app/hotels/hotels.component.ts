@@ -7,17 +7,60 @@ import { Router } from '@angular/router';
   styleUrls: ['./hotels.component.css']
 })
 export class HotelsComponent   {
-  arr:any;
+arr:any[]=[];
 service:HotelsService;
-  constructor(service1:HotelsService) { 
+
+  constructor(private router:Router,service1:HotelsService) { 
     this.service=service1;
-    this.arr=this.service.hotels;
   
   }
+  getProducts(){
+    this.service.getAllProducts().subscribe(data=>{
+      console.log(data);
+      this.arr=data;
+    
+   
+      console.log(this.arr);
+      
+    },error=>{
+        console.log(error);
+    });
+
+  
+    
+
+}
+bookingService(id:any){
+  console.log("inside function");
+
+  this.arr.forEach(a=>{
+    if(id==a.hotelId){
+      a.status = "booked";
+      console.log(a.status);
+    }
+  });
+}
+sendHotel(root:string,name:string){
+  this.arr.forEach(a=>{
+    if(name==a.hotelName){
+      this.service.recieveHotel(a);
+      console.log(a);
+    }
+  });
+  this.router.navigate([`${root}`]);
+ 
+
+
+}
+ngOnInit(): void {
+  this.getProducts();
+}
 
 
 }
   
+
+
 
 
 
